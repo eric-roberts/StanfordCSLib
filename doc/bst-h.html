@@ -1,0 +1,314 @@
+<html>
+<head>
+<title>../bst.h</title>
+<link rel="stylesheet" type="text/css" href="cppdoc.css" />
+</head>
+<body>
+<pre class=code>
+<span class=comment>/*
+ * File: bst.h
+ * -----------
+ * This interface supports a general abstraction for binary search trees. 
+ * A binary search tree (or BST for short) is a binary tree in which the
+ * key in each node is greater than the keys descending to the left and
+ * less than the keys descending to the right.
+ *
+ * Although the BST and BSTNode types are available to clients, most
+ * applications will find the Set and HashMap types instead, which use the
+ * BST type in their implementation.
+ */
+</span>
+#ifndef _bst_h
+#define _bst_h
+
+#include &lt;stdarg.h&gt;
+#include "cmpfn.h"
+#include "cslib.h"
+#include "generic.h"
+#include "iterator.h"
+
+<a name="Type:BST"><span class=comment>/*
+ * Type: BST
+ * ---------
+ * The abstract type for a binary search tree.
+ */
+</span>
+typedef struct BSTCDT *BST;
+
+<a name="Type:TraversalOrder"><span class=comment>/*
+ * Type: TraversalOrder
+ * --------------------
+ * This type allows clients to control the order of iteration.  Specifying
+ * PREORDER means that the root node is processed before its children,
+ * INORDER means that the root is processed between the processing of the
+ * left and right children, and POSTORDER means that the root is processed
+ * after its children.
+ */
+</span>
+typedef enum {PREORDER, INORDER, POSTORDER} TraversalOrder;
+
+<a name="Type:BSTNode"><span class=comment>/*
+ * Type: BSTNode
+ * -------------
+ * The abstract type for a tree node.
+ */
+</span>
+typedef struct BSTNodeCDT *BSTNode;
+
+<a name="Function:newBST"><span class=comment>/*
+ * Function: newBST
+ * Usage: bst = newBST(type);
+ * --------------------------
+ * Creates a new empty binary search tree for keys with the specified base
+ * type.  The type parameter must be an explicit type name like int or
+ * string.
+ */
+</span>
+#define newBST(type) newBSTFromType(#type)
+
+<a name="Function:newBSTFromType"><span class=comment>/*
+ * Function: newBSTFromType
+ * Usage: bst = newBSTFromType(baseType);
+ * --------------------------------------
+ * Creates a new empty binary search tree for keys with the specified base
+ * type expressed as a string.
+ */
+</span>
+BST newBSTFromType(string baseType);
+
+<a name="Function:freeBST"><span class=comment>/*
+ * Function: freeBST
+ * Usage: freeBST(bst);
+ * --------------------
+ * Frees the storage for a binary search tree.  If nodes contain data
+ * fields with allocated storage, the client must free this storage by
+ * traversing the tree prior to calling freeBST.
+ */
+</span>
+void freeBST(BST bst);
+
+<a name="Function:size"><span class=comment>/*
+ * Function: size
+ * Usage: n = size(bst);
+ * ---------------------
+ * Returns the number of elements in the binary search tree.
+ */
+</span>
+int sizeBST(BST bst);
+
+<a name="Function:isEmpty"><span class=comment>/*
+ * Function: isEmpty
+ * Usage: if (isEmpty(bst)) . . .
+ * ------------------------------
+ * Returns true if the binary search tree has no entries.
+ */
+</span>
+bool isEmptyBST(BST bst);
+
+<a name="Function:clearBST"><span class=comment>/*
+ * Function: clearBST
+ * Usage: clearBST(bst);
+ * ---------------------
+ * Removes all nodes from the BST.
+ */
+</span>
+void clearBST(BST bst);
+
+<a name="Function:clone"><span class=comment>/*
+ * Function: clone
+ * Usage: newbst = clone(bst);
+ * ---------------------------
+ * Creates a copy of the BST.  The clone function copies only the first
+ * level of the structure and does not copy the individual elements.
+ */
+</span>
+BST cloneBST(BST bst);
+
+<a name="Function:findBSTNode"><span class=comment>/*
+ * Function: findBSTNode
+ * Usage: node = findBSTNode(bst, key);
+ * ------------------------------------
+ * Applies the binary search algorithm to find a particular key in the tree
+ * represented by bst.  If the key appears in the tree, findBSTNode returns
+ * that node; if not, findBSTNode returns NULL.
+ */
+</span>
+BSTNode findBSTNode(BST bst, ...);
+
+<a name="Friend function:findBSTNodeFromArg"><span class=comment>/*
+ * Friend function: findBSTNodeFromArg
+ * Usage: node = findBSTNodeFromArg(bst, any);
+ * -------------------------------------------
+ * Identical to findBSTNode except that the key is taken from the generic
+ * argument.
+ */
+</span>
+BSTNode findBSTNodeFromArg(BST bst, GenericType any);
+
+<a name="Function:insertBSTNode"><span class=comment>/*
+ * Function: insertBSTNode
+ * Usage: node = insertBSTNode(bst, key);
+ * --------------------------------------
+ * Inserts a new node into a binary search tree, if it does not already
+ * exist.  If a node already exists in the tree, insertBSTNode returns that
+ * node; if not, insertBSTNode creates a new node, copies the key value,
+ * and returns the newly created node.
+ */
+</span>
+BSTNode insertBSTNode(BST bst, ...);
+
+<a name="Friend function:insertBSTNodeFromArg"><span class=comment>/*
+ * Friend function: insertBSTNodeFromArg
+ * Usage: node = insertBSTNodeFromArg(bst, any);
+ * ---------------------------------------------
+ * Identical to insertBSTNode except that the key is taken from the generic
+ * argument.
+ */
+</span>
+BSTNode insertBSTNodeFromArg(BST bst, GenericType any);
+
+<a name="Function:removeBSTNode"><span class=comment>/*
+ * Function: removeBSTNode
+ * Usage: removeBSTNode(bst, key);
+ * -------------------------------
+ * Removes a node in the tree that matches the specified key.
+ */
+</span>
+void removeBSTNode(BST bst, ...);
+
+<a name="Friend function:removeBSTNodeFromArg"><span class=comment>/*
+ * Friend function: removeBSTNodeFromArg
+ * Usage: node = removeBSTNodeFromArg(bst, any);
+ * ---------------------------------------------
+ * Identical to removeBSTNode except that the key is taken from the generic
+ * argument.
+ */
+</span>
+void removeBSTNodeFromArg(BST bst, GenericType any);
+
+<a name="Function:mapBST"><span class=comment>/*
+ * Function: mapBST
+ * Usage: mapBST(bst, fn, order, data);
+ * ------------------------------------
+ * Calls a function on every node in the binary search tree using the
+ * specified iteration order.  The arguments to the callback function are a
+ * pointer to the node and the data pointer.
+ */
+</span>
+void mapBST(BST bst, proc fn, TraversalOrder order, void *data);
+
+<a name="Function:newNodeIterator"><span class=comment>/*
+ * Function: newNodeIterator
+ * Usage: iterator = newNodeIterator(bst, order);
+ * ----------------------------------------------
+ * Returns an iterator for traversing the nodes in a binary search tree in
+ * the specified order.  The foreach statement automatically uses an
+ * INORDER traversal.
+ */
+</span>
+Iterator newNodeIterator(BST bst, TraversalOrder order);
+
+<a name="Function:getRootBST"><span class=comment>/*
+ * Function: getRootBST
+ * Usage: root = getRootBST(bst);
+ * ------------------------------
+ * Returns the root node of the binary search tree.
+ */
+</span>
+BSTNode getRootBST(BST bst);
+
+<a name="Function:getLeftChild"><span class=comment>/*
+ * Function: getLeftChild
+ * Usage: child = getLeftChild(node);
+ * ----------------------------------
+ * Returns the left child of the specified node in a binary search tree.
+ */
+</span>
+BSTNode getLeftChild(BSTNode node);
+
+<a name="Function:getRightChild"><span class=comment>/*
+ * Function: getRightChild
+ * Usage: child = getRightChild(node);
+ * -----------------------------------
+ * Returns the right child of the specified node in a binary search tree.
+ */
+</span>
+BSTNode getRightChild(BSTNode node);
+
+<a name="Function:getKey"><span class=comment>/*
+ * Function: getKey
+ * Usage: any = getKey(node);
+ * --------------------------
+ * Returns the key as a generic object
+ */
+</span>
+GenericType getKey(BSTNode node);
+
+<a name="Function:getKeyString"><span class=comment>/*
+ * Function: getKeyString
+ * Usage: str = getKeyString(node);
+ * --------------------------------
+ * Returns a string representation of the key.
+ */
+</span>
+string getKeyString(BSTNode node);
+
+<a name="Function:setNodeValue"><span class=comment>/*
+ * Function: setNodeValue
+ * Usage: setNodeValue(node, value);
+ * ---------------------------------
+ * Sets the value pointer associated with a BSTNode.
+ */
+</span>
+void setNodeValue(BSTNode node, void *value);
+
+<a name="Function:getNodeValue"><span class=comment>/*
+ * Function: getNodeValue
+ * Usage: value = getNodeValue(node);
+ * ----------------------------------
+ * Returns the value pointer associated with a BSTNode.
+ */
+</span>
+void *getNodeValue(BSTNode node);
+
+<a name="Function:getBaseTypeBST"><span class=comment>/*
+ * Function: getBaseTypeBST
+ * Usage: baseType = getBaseTypeBST(bst);
+ * --------------------------------------
+ * Returns the name of the key type.
+ */
+</span>
+string getBaseTypeBST(BST bst);
+
+<a name="Function:getBaseTypeSizeBST"><span class=comment>/*
+ * Function: getBaseTypeSizeBST
+ * Usage: size = getBaseTypeSizeBST(bst);
+ * --------------------------------------
+ * Returns the size of the base type in bytes.
+ */
+</span>
+int getBaseTypeSizeBST(BST bst);
+
+<a name="Function:setCompareFnBST"><span class=comment>/*
+ * Function: setCompareFnBST
+ * Usage: setCompareFnBST(bst, cmpFn);
+ * -----------------------------------
+ * Sets the comparison function for keys.  This method need not be called
+ * for any of the standard types.
+ */
+</span>
+void setCompareFnBST(BST bst, CompareFn cmpFn);
+
+<a name="Function:getCompareFnBST"><span class=comment>/*
+ * Function: getCompareFnBST
+ * Usage: cmpFn = getCompareFnBST(bst);
+ * ------------------------------------
+ * Returns the comparison function for keys.
+ */
+</span>
+CompareFn getCompareFnBST(BST bst);
+
+#endif
+</pre>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<html>
+<head>
+<title>../charset.h</title>
+<link rel="stylesheet" type="text/css" href="cppdoc.css" />
+</head>
+<body>
+<pre class=code>
+<span class=comment>/*
+ * File: charset.h
+ * ---------------
+ * This interface exports an abstract type that represents sets of
+ * characters.
+ */
+</span>
+#ifndef _charset_h
+#define _charset_h
+
+#include &lt;stdarg.h&gt;
+#include "cslib.h"
+#include "generic.h"
+
+<a name="Type:CharSet"><span class=comment>/*
+ * Type: CharSet
+ * -------------
+ * Defines the abstract type used to represent sets of characters
+ */
+</span>
+typedef struct CharSetCDT *CharSet;
+
+<span class=comment>/* Exported entries */</span>
+
+<a name="Function:newCharSet"><span class=comment>/*
+ * Function: newCharSet
+ * Usage: set = newCharSet();
+ * --------------------------
+ * Creates an empty set capable of holding characters.
+ */
+</span>
+CharSet newCharSet();
+
+<a name="Function:freeCharSet"><span class=comment>/*
+ * Function: freeCharSet
+ * Usage: freeCharSet(set);
+ * ------------------------
+ * Frees the storage associated with a character set.
+ */
+</span>
+void freeCharSet(CharSet set);
+
+<a name="Function:size"><span class=comment>/*
+ * Function: size
+ * Usage: n = size(set);
+ * ---------------------
+ * Returns the number of elements in the set.
+ */
+</span>
+int sizeCharSet(CharSet set);
+
+<a name="Function:isEmpty"><span class=comment>/*
+ * Function: isEmpty
+ * Usage: if (isEmpty(set)) . . .
+ * ------------------------------
+ * Returns true if the set has no elements.
+ */
+</span>
+bool isEmptyCharSet(CharSet set);
+
+<a name="Function:clear"><span class=comment>/*
+ * Function: clear
+ * Usage: clear(set);
+ * ------------------
+ * Removes all characters from the set.
+ */
+</span>
+void clearCharSet(CharSet set);
+
+<a name="Function:clone"><span class=comment>/*
+ * Function: clone
+ * Usage: newset = clone(set);
+ * ---------------------------
+ * Creates a copy of the set.  The clone function copies only the first
+ * level of the structure and does not copy the individual elements.
+ */
+</span>
+CharSet cloneCharSet(CharSet set);
+
+<a name="Function:contains"><span class=comment>/*
+ * Function: contains
+ * Usage: if (contains(set, ch)) . . .
+ * -----------------------------------
+ * Returns true if the character ch is a member of the set.
+ */
+</span>
+bool containsCharSet(CharSet set, char ch);
+
+<a name="Function:add"><span class=comment>/*
+ * Function: add
+ * Usage: add(set, ch);
+ * --------------------
+ * Adds the character ch to the set.
+ */
+</span>
+void addCharSet(CharSet set, char ch);
+
+<a name="Function:addString"><span class=comment>/*
+ * Function: addString
+ * Usage: addString(set, str);
+ * ---------------------------
+ * Adds the characters in str to the set.
+ */
+</span>
+void addString(CharSet set, string str);
+
+<a name="Function:remove"><span class=comment>/*
+ * Function: remove
+ * Usage: remove(set, ch);
+ * -----------------------
+ * Removes an element from the set.
+ */
+</span>
+void removeCharSet(CharSet set, char ch);
+
+<a name="Function:equals"><span class=comment>/*
+ * Function: equals
+ * Usage: if (equals(s1, s2)) . . .
+ * --------------------------------
+ * Returns true if s1 and s2 are equal, which means that they contain the
+ * same elements.
+ */
+</span>
+bool equalsCharSet(CharSet s1, CharSet s2);
+
+<a name="Function:isSubset"><span class=comment>/*
+ * Function: isSubset
+ * Usage: if (isSubset(s1, s2)) . . .
+ * ----------------------------------
+ * Returns true if s1 is a subset of s2.
+ */
+</span>
+bool isSubsetCharSet(CharSet s1, CharSet s2);
+
+<a name="Function:union"><span class=comment>/*
+ * Function: union
+ * Usage: set = union(s1, s2);
+ * ---------------------------
+ * Returns a new set consisting of all elements in either s1 or s2.
+ */
+</span>
+CharSet unionCharSet(CharSet s1, CharSet s2);
+
+<a name="Function:intersection"><span class=comment>/*
+ * Function: intersection
+ * Usage: set = intersection(s1, s2);
+ * ----------------------------------
+ * Returns a new set consisting of all elements in both s1 and s2.
+ */
+</span>
+CharSet intersectionCharSet(CharSet s1, CharSet s2);
+
+<a name="Function:setDifference"><span class=comment>/*
+ * Function: setDifference
+ * Usage: set = setDifference(s1, s2);
+ * -----------------------------------
+ * Returns a new set consisting of all elements in s1 that are not elements
+ * of s2.
+ */
+</span>
+CharSet setDifferenceCharSet(CharSet s1, CharSet s2);
+
+#endif
+</pre>
+</body>
+</html>
