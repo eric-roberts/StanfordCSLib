@@ -1,5 +1,5 @@
 # Makefile for StanfordCSLib directory
-# Last modified on Fri Jan  6 11:58:27 2017 by eroberts
+# Last modified on Fri Jan  6 12:59:32 2017 by eroberts
 #****************************************************************
 
 SCRIPTS = \
@@ -102,6 +102,8 @@ all: directories / $(OBJECTS) / $(LIBRARIES) / $(TESTS)
 directories: always
 	@-(if ! test -d obj ; then mkdir obj ; fi)
 	@-(if ! test -d lib ; then mkdir lib ; fi)
+
+always:
 
 install: all
 	@-(if test -w /usr/local/bin ; then \
