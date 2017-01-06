@@ -1,0 +1,138 @@
+<html>
+<head>
+<title>../platform.h</title>
+<link rel="stylesheet" type="text/css" href="cppdoc.css" />
+</head>
+<body>
+<pre class=code>
+<a name="Friends file:platform.h"><span class=comment>/*
+ * Friends file: platform.h
+ * ------------------------
+ * This interface defines the platform-specific parts of the cslib library.
+ * This file is logically part of the implementation and should not be
+ * interesting to clients.
+ */
+</span>
+#ifndef _platform_h
+#define _platform_h
+
+#include "cslib.h"
+#include "gevents.h"
+#include "gobjects.h"
+#include "gtypes.h"
+#include "gwindow.h"
+
+void initPlatform(void);
+string getId(void *ptr);
+
+<span class=comment>// void clearConsoleOp(void);</span>
+<span class=comment>// void setConsoleFontOp(string font);</span>
+<span class=comment>// void setConsoleSizeOp(double width, double height);</span>
+<span class=comment>// string openFileDialogOp(string title, string mode, string path);</span>
+
+void createGWindowOp(GWindow gw, double width, double height, GObject top);
+void deleteGWindowOp(GWindow gw);
+void closeOp(GWindow gw);
+void requestFocusOp(GWindow gw);
+void clearOp(GWindow gw);
+void repaintOp(GWindow gw);
+void setVisibleGWindowOp(GWindow gw, bool flag);
+void setResizableOp(GWindow gw, bool flag);
+void setWindowTitleOp(GWindow gw, string title);
+void setRegionAlignmentOp(GWindow gw, string region, string align);
+void addToRegionOp(GWindow gw, GObject gobj, string region);
+
+<span class=comment>// double getScreenWidthOp(void);</span>
+<span class=comment>// double getScreenHeightOp(void);</span>
+
+GEvent getNextEventOp(int mask);
+GEvent waitForEventOp(int mask);
+
+<span class=comment>// void exitGraphicsOp(void);</span>
+<span class=comment>// void createTimerOp(GTimer timer, double delay);</span>
+<span class=comment>// void deleteTimerOp(GTimer timer);</span>
+
+void pauseOp(double milliseconds);
+
+<span class=comment>// void startTimerOp(GTimer timer);</span>
+<span class=comment>// void stopTimerOp(GTimer timer);</span>
+<span class=comment>// void createSoundOp(Sound sound, string filename);</span>
+<span class=comment>// void deleteSoundOp(Sound sound);</span>
+<span class=comment>// void playSoundOp(Sound sound);</span>
+<span class=comment>// void startSoundOp(Sound sound);</span>
+<span class=comment>// void stopSoundOp(Sound sound);</span>
+
+void createGRectOp(GRect rect, double width, double height);
+
+<span class=comment>// void createGRoundRectOp(GObject gobj, double width, double height,</span>
+<span class=comment>//                                       double corner);</span>
+<span class=comment>// void createG3DRectOp(GObject gobj, double width, double height,</span>
+<span class=comment>//                                    bool raised);</span>
+<span class=comment>// void setRaisedOp(GObject gobj, bool raised);</span>
+
+void createGOvalOp(GOval oval, double width, double height);
+
+void createGArcOp(GArc arc, double width, double height,
+                            double start, double sweep);
+void setStartAngleOp(GArc arc, double angle);
+void setSweepAngleOp(GArc arc, double angle);
+void setFrameRectangleOp(GArc arc, double x, double y,
+                                   double width, double height);
+
+void createGLineOp(GLine line, double x1, double y1, double x2, double y2);
+void setStartPointOp(GObject gobj, double x, double y);
+void setEndPointOp(GObject gobj, double x, double y);
+
+<span class=comment>// GDimension createGImageOp(GObject gobj, string filename);</span>
+
+void createGPolygonOp(GPolygon poly);
+void addVertexOp(GPolygon poly, double x, double y);
+
+<span class=comment>// void setActionCommandOp(GObject gobj, string cmd);</span>
+<span class=comment>// GDimension getSizeOp(GObject gobj);</span>
+<span class=comment>// void createGButtonOp(GObject gobj, string label);</span>
+<span class=comment>// void createGCheckBoxOp(GObject gobj, string label);</span>
+<span class=comment>// bool isSelectedOp(GObject gobj);</span>
+<span class=comment>// void setSelectedOp(GObject gobj, bool state);</span>
+<span class=comment>// void createGSliderOp(GObject gobj, int min, int max, int value);</span>
+<span class=comment>// int getValueOp(GObject gobj);</span>
+<span class=comment>// void setValueOp(GObject gobj, int value);</span>
+<span class=comment>// void createGTextFieldOp(GObject gobj, int nChars);</span>
+<span class=comment>// string getTextOp(GObject gobj);</span>
+<span class=comment>// void setTextOp(GObject gobj, string str);</span>
+<span class=comment>// void createGChooserOp(GObject gobj);</span>
+<span class=comment>// void addItemOp(GObject gobj, string item);</span>
+<span class=comment>// string getSelectedItemOp(GObject gobj);</span>
+<span class=comment>// void setSelectedItemOp(GObject gobj, string item);</span>
+
+void createGCompoundOp(GObject gobj);
+void addOp(GObject compound, GObject gobj);
+void removeOp(GObject gobj);
+
+<span class=comment>// void deleteGObjectOp(GObject gobj);</span>
+
+void sendForwardOp(GObject gobj);
+void sendToFrontOp(GObject gobj);
+void sendBackwardOp(GObject gobj);
+void sendToBackOp(GObject gobj);
+
+void setVisibleGObjectOp(GObject gobj, bool flag);
+void setColorOp(GObject gobj, string color);
+void setLocationOp(GObject gobj, double x, double y);
+void setSizeOp(GObject gobj, double width, double height);
+
+void drawOp(GWindow gw, GObject gobj);
+void setFilledOp(GObject gobj, bool flag);
+void setFillColorOp(GObject gobj, string color);
+
+void createGLabelOp(GObject gobj, string label);
+void setFontOp(GObject gobj, string font);
+void setLabelOp(GObject gobj, string str);
+double getFontAscentOp(GObject gobj);
+double getFontDescentOp(GObject gobj);
+GDimension getGLabelSizeOp(GObject gobj);
+
+#endif
+</pre>
+</body>
+</html>

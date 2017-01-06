@@ -1,0 +1,230 @@
+<html>
+<head>
+<title>../ref.h</title>
+<link rel="stylesheet" type="text/css" href="cppdoc.css" />
+</head>
+<body>
+<pre class=code>
+<span class=comment>/*
+ * File: ref.h
+ * -----------
+ * This interface exports several simple functions for allocating pointers
+ * to the atomic types.
+ */
+</span>
+#ifndef _ref_h
+#define _ref_h
+
+#include "cslib.h"
+
+<a name="Function:newRefInt"><span class=comment>/*
+ * Function: newRefInt
+ * Usage: ref = newRefInt(value);
+ * ------------------------------
+ * Allocates a ref pointing to the specified int value.
+ */
+</span>
+void *newRefInt(int value);
+
+<a name="Function:newRefShort"><span class=comment>/*
+ * Function: newRefShort
+ * Usage: ref = newRefShort(value);
+ * --------------------------------
+ * Allocates a ref pointing to the specified short value.
+ */
+</span>
+void *newRefShort(short value);
+
+<a name="Function:newRefLong"><span class=comment>/*
+ * Function: newRefLong
+ * Usage: ref = newRefLong(value);
+ * -------------------------------
+ * Allocates a ref pointing to the specified long value.
+ */
+</span>
+void *newRefLong(long value);
+
+<a name="Function:newRefFloat"><span class=comment>/*
+ * Function: newRefFloat
+ * Usage: ref = newRefFloat(value);
+ * --------------------------------
+ * Allocates a ref pointing to the specified float value.
+ */
+</span>
+void *newRefFloat(float value);
+
+<a name="Function:newRefDouble"><span class=comment>/*
+ * Function: newRefDouble
+ * Usage: ref = newRefDouble(value);
+ * ---------------------------------
+ * Allocates a ref pointing to the specified double value.
+ */
+</span>
+void *newRefDouble(double value);
+
+<a name="Function:newRefChar"><span class=comment>/*
+ * Function: newRefChar
+ * Usage: ref = newRefChar(value);
+ * -------------------------------
+ * Allocates a ref pointing to the specified char value.
+ */
+</span>
+void *newRefChar(char value);
+
+<a name="Function:newRefBool"><span class=comment>/*
+ * Function: newRefBool
+ * Usage: ref = newRefBool(value);
+ * -------------------------------
+ * Allocates a ref pointing to the specified bool value.
+ */
+</span>
+void *newRefBool(bool value);
+
+<a name="Function:newRefUnsigned"><span class=comment>/*
+ * Function: newRefUnsigned
+ * Usage: ref = newRefUnsigned(value);
+ * -----------------------------------
+ * Allocates a ref pointing to the specified unsigned value.
+ */
+</span>
+void *newRefUnsigned(unsigned value);
+
+<a name="Function:newRefUnsignedShort"><span class=comment>/*
+ * Function: newRefUnsignedShort
+ * Usage: ref = newRefUnsignedShort(value);
+ * ----------------------------------------
+ * Allocates a ref pointing to the specified unsigned short value.
+ */
+</span>
+void *newRefUnsignedShort(unsigned short value);
+
+<a name="Function:newRefUnsignedLong"><span class=comment>/*
+ * Function: newRefUnsignedLong
+ * Usage: ref = newRefUnsignedLong(value);
+ * ---------------------------------------
+ * Allocates a ref pointing to the specified unsigned long value.
+ */
+</span>
+void *newRefUnsignedLong(unsigned long value);
+
+<a name="Function:newRefUnsignedChar"><span class=comment>/*
+ * Function: newRefUnsignedChar
+ * Usage: ref = newRefUnsignedChar(value);
+ * ---------------------------------------
+ * Allocates a ref pointing to the specified unsigned char value.
+ */
+</span>
+void *newRefUnsignedChar(unsigned char value);
+
+<span class=comment>/*
+ * Part 2 -- Functions to dereference generic pointers
+ * ---------------------------------------------------
+ * These functions take a generic pointer of type void * and return the
+ * value to which it points, which must be of the type indicated by the
+ * function name.  For example, refToInt(ref) interprets ref as a pointer
+ * to an int and returns the integer at that address.
+ */
+</span>
+<a name="Function:refToInt"><span class=comment>/*
+ * Function: refToInt
+ * Usage: i = refToInt(ref);
+ * -------------------------
+ * Returns the int to which this reference points.
+ */
+</span>
+int refToInt(void *ref);
+
+<a name="Function:refToShort"><span class=comment>/*
+ * Function: refToShort
+ * Usage: s = refToShort(ref);
+ * ---------------------------
+ * Returns the short to which this reference points.
+ */
+</span>
+short refToShort(void *ref);
+
+<a name="Function:refToLong"><span class=comment>/*
+ * Function: refToLong
+ * Usage: l = refToLong(ref);
+ * --------------------------
+ * Returns the long to which this reference points.
+ */
+</span>
+long refToLong(void *ref);
+
+<a name="Function:refToFloat"><span class=comment>/*
+ * Function: refToFloat
+ * Usage: f = refToFloat(ref);
+ * ---------------------------
+ * Returns the float to which this reference points.
+ */
+</span>
+float refToFloat(void *ref);
+
+<a name="Function:refToDouble"><span class=comment>/*
+ * Function: refToDouble
+ * Usage: d = refToDouble(ref);
+ * ----------------------------
+ * Returns the double to which this reference points.
+ */
+</span>
+double refToDouble(void *ref);
+
+<a name="Function:refToChar"><span class=comment>/*
+ * Function: refToChar
+ * Usage: c = refToChar(ref);
+ * --------------------------
+ * Returns the char to which this reference points.
+ */
+</span>
+char refToChar(void *ref);
+
+<a name="Function:refToBool"><span class=comment>/*
+ * Function: refToBool
+ * Usage: b = refToBool(ref);
+ * --------------------------
+ * Returns the bool to which this reference points.
+ */
+</span>
+bool refToBool(void *ref);
+
+<a name="Function:refToUnsigned"><span class=comment>/*
+ * Function: refToUnsigned
+ * Usage: u = refToUnsigned(ref);
+ * ------------------------------
+ * Returns the unsigned to which this reference points.
+ */
+</span>
+unsigned refToUnsigned(void *ref);
+
+<a name="Function:refToUnsignedShort"><span class=comment>/*
+ * Function: refToUnsignedShort
+ * Usage: us = refToUnsignedShort(ref);
+ * ------------------------------------
+ * Returns the unsigned short to which this reference points.
+ */
+</span>
+unsigned short refToUnsignedShort(void *ref);
+
+<a name="Function:refToUnsignedLong"><span class=comment>/*
+ * Function: refToUnsignedLong
+ * Usage: ul = refToUnsignedLong(ref);
+ * -----------------------------------
+ * Returns the unsigned long to which this reference points.
+ */
+</span>
+unsigned long refToUnsignedLong(void *ref);
+
+<a name="Function:refToUnsignedChar"><span class=comment>/*
+ * Function: refToUnsignedChar
+ * Usage: uc = refToUnsignedChar(ref);
+ * -----------------------------------
+ * Returns the unsigned char to which this reference points.
+ */
+</span>
+unsigned char refToUnsignedChar(void *ref);
+
+#endif
+</pre>
+</body>
+</html>

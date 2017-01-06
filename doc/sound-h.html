@@ -1,0 +1,63 @@
+<html>
+<head>
+<title>../sound.h</title>
+<link rel="stylesheet" type="text/css" href="cppdoc.css" />
+</head>
+<body>
+<pre class=code>
+<span class=comment>/*
+ * File: sound.h
+ * -------------
+ * This interface defines an abstract type that represents a sound.
+ */
+</span>
+#ifndef _sound_h
+#define _sound_h
+
+<a name="Type:Sound"><span class=comment>/*
+ * Type: Sound
+ * -----------
+ * This type encapsulates a sound file.  The sound file is specified in the
+ * constructor and must be a file in either the current directory or a
+ * subdirectory named sounds.
+ *
+ * The following code, for example, plays the sound file ringtone.wav:
+ *
+ *    Sound ringtone = newSound("ringtone.wav");
+ *    play(ringtone);
+ */
+</span>
+typedef struct SoundCDT *Sound;
+
+<a name="Function:newSound"><span class=comment>/*
+ * Function: newSound
+ * Usage: sound = newSound(filename);
+ * ----------------------------------
+ * Creates a Sound object from the specified file.
+ */
+</span>
+Sound newSound(string filename);
+
+<a name="Function:freeSound"><span class=comment>/*
+ * Function: freeSound
+ * Usage: freeSound(sound);
+ * ------------------------
+ * Frees the memory associated with the sound.
+ */
+</span>
+void freeSound(Sound sound);
+
+<a name="Function:play"><span class=comment>/*
+ * Function: play
+ * Usage: play(sound);
+ * -------------------
+ * Starts playing the sound.  This call returns immediately without waiting
+ * for the sound to finish.
+ */
+</span>
+void play(Sound sound);
+
+#endif
+</pre>
+</body>
+</html>

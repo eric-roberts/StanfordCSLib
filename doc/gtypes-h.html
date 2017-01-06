@@ -1,0 +1,179 @@
+<html>
+<head>
+<title>../gtypes.h</title>
+<link rel="stylesheet" type="text/css" href="cppdoc.css" />
+</head>
+<body>
+<pre class=code>
+<span class=comment>/*
+ * File: gtypes.h
+ * --------------
+ * This interface defines types for representing points, dimensions, and
+ * rectangles.
+ */
+</span>
+#ifndef _gtypes_h
+#define _gtypes_h
+
+#include "generic.h"
+
+<a name="Type:GPoint"><span class=comment>/*
+ * Type: GPoint
+ * ------------
+ * This type contains real-valued x and y fields.  It is used to represent
+ * a location on the graphics plane.
+ */
+</span>
+typedef struct {
+   double x;
+   double y;
+} GPoint;
+
+<a name="Type:GDimension"><span class=comment>/*
+ * Type: GDimension
+ * ----------------
+ * This type contains real-valued width and height fields.  It is used to
+ * indicate the size of a graphical object.
+ */
+</span>
+typedef struct {
+   double width;
+   double height;
+} GDimension;
+
+<a name="Type:GRectangle"><span class=comment>/*
+ * Type: GRectangle
+ * ----------------
+ * This type contains real-valued x, y, width, and height fields.  It is
+ * used to represent the bounding box of a graphical object.
+ */
+</span>
+typedef struct {
+   double x;
+   double y;
+   double width;
+   double height;
+} GRectangle;
+
+<a name="Function:createGPoint"><span class=comment>/*
+ * Function: createGPoint
+ * Usage: pt = createGPoint(x, y);
+ * -------------------------------
+ * Creates a GPoint structure with the specified x and y coordinates.
+ */
+</span>
+GPoint createGPoint(double x, double y);
+
+<a name="Function:getX"><span class=comment>/*
+ * Function: getX
+ * Usage: x = getX(pt);
+ * --------------------
+ * Returns the x component of the GPoint.
+ */
+</span>
+double getXGPoint(GPoint pt);
+
+<a name="Function:getY"><span class=comment>/*
+ * Function: getY
+ * Usage: y = getY(pt);
+ * --------------------
+ * Returns the y component of the GPoint.
+ */
+</span>
+double getYGPoint(GPoint pt);
+
+<a name="Function:createGDimension"><span class=comment>/*
+ * Function: createGDimension
+ * Usage: dim = createGDimension(width, height);
+ * ---------------------------------------------
+ * Creates a GDimension value with the specified width and height
+ * coordinates.
+ */
+</span>
+GDimension createGDimension(double width, double height);
+
+<a name="Function:getWidth"><span class=comment>/*
+ * Function: getWidth
+ * Usage: width = getWidth(dim);
+ * -----------------------------
+ * Returns the width component of the GDimension.
+ */
+</span>
+double getWidthGDimension(GDimension dim);
+
+<a name="Function:getHeight"><span class=comment>/*
+ * Function: getHeight
+ * Usage: width = getHeight(dim);
+ * ------------------------------
+ * Returns the width component of the GDimension.
+ */
+</span>
+double getHeightGDimension(GDimension dim);
+
+<a name="Function:createGRectangle"><span class=comment>/*
+ * Function: createGRectangle
+ * Usage: r = createGRectangle(x, y, width, height);
+ * -------------------------------------------------
+ * Creates a GRectangle value with the specified components.
+ */
+</span>
+GRectangle createGRectangle(double x, double y, double width, double height);
+
+<a name="Function:getX"><span class=comment>/*
+ * Function: getX
+ * Usage: double x = getX(r);
+ * --------------------------
+ * Returns the x component of the rectangle.
+ */
+</span>
+double getXGRectangle(GRectangle r);
+
+<a name="Function:getY"><span class=comment>/*
+ * Function: getY
+ * Usage: double y = getY(r);
+ * --------------------------
+ * Returns the y component of the rectangle.
+ */
+</span>
+double getYGRectangle(GRectangle r);
+
+<a name="Function:getWidth"><span class=comment>/*
+ * Function: getWidth
+ * Usage: width = getWidth(r);
+ * ---------------------------
+ * Returns the width component of the GRectangle.
+ */
+</span>
+double getWidthGRectangle(GRectangle r);
+
+<a name="Function:getHeight"><span class=comment>/*
+ * Function: getHeight
+ * Usage: width = getHeight(r);
+ * ----------------------------
+ * Returns the width component of the GRectangle.
+ */
+</span>
+double getHeightGRectangle(GRectangle r);
+
+<a name="Function:isEmpty"><span class=comment>/*
+ * Function: isEmpty
+ * Usage: if (isEmpty(r)) . . .
+ * ----------------------------
+ * Returns true if the rectangle is empty.
+ */
+</span>
+bool isEmptyGRectangle(GRectangle r);
+
+<a name="Function:contains"><span class=comment>/*
+ * Function: contains
+ * Usage: if (contains(r, pt)) . . .
+ * ---------------------------------
+ * Returns true if the rectangle contains the given point.
+ */
+</span>
+bool containsGRectangle(GRectangle r, GPoint pt);
+
+#endif
+</pre>
+</body>
+</html>
